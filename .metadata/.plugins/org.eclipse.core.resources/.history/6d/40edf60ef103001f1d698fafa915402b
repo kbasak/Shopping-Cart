@@ -1,0 +1,5 @@
+package com.cts.shopping.cart.response;
+
+public class ResgisterResponse {
+
+}

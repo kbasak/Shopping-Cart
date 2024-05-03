@@ -1,0 +1,4 @@
+package com.cts.shopping.cart.service;
+
+public interface AuthService {
+}

@@ -1,0 +1,13 @@
+package com.cts.shopping.cart;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class ShoppingCartSystemsApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ShoppingCartSystemsApplication.class, args);
+	}
+
+}
