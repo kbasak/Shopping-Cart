@@ -1,0 +1,14 @@
+create database shopping_cart;
+
+use shopping_cart;
+
+CREATE TABLE USER_DETAILS
+(
+id INT NOT NULL auto_increment,
+USERNAME VARCHAR(10) NOT NULL,
+PASSWORD VARCHAR(256) NOT NULL,
+PRIMARY KEY (id),
+UNIQUE KEY (USERNAME)
+);
+
+
