@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Pattern;
 
 public class RegistrationRequest {
 	@NotBlank(message = "UserName shouldn't be blank")
-	@Email(message = "Invalid Username")
+	@Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}", flags = Pattern.Flag.CASE_INSENSITIVE, message = "Invalid Username")
 	private String username;
 
 	@NotBlank(message = "Name shouldn't be blank")

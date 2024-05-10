@@ -48,13 +48,6 @@ public class UsersDetails {
 		this.password = password;
 	}
 
-	public UsersDetails(long id, String username, String password) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
-	}
-
 	public UsersDetails(String username, String name, String password) {
 		super();
 		this.username = username;

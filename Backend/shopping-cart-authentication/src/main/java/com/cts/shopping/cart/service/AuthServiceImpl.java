@@ -2,6 +2,8 @@ package com.cts.shopping.cart.service;
 
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,11 +21,17 @@ public class AuthServiceImpl implements AuthService, UserDetailsService {
 	@Autowired
 	private UsersRepo userRepo;
 
+	private Logger logger = LoggerFactory.getLogger(AuthServiceImpl.class);
+	
 	@Override
 	public UsersDetails registerUser(UsersDetails user) throws Exception {
+		logger.info("Start authService register method");
 		if (this.userRepo.existsByUsername(user.getUsername())) {
+			logger.info("Username already found in DB");
 			throw new UserAlreadyExistException("User Already Exist: " + user.getUsername());
 		} else {
+			logger.info("User saving db DB");
+			logger.info("End authService register method");
 			return userRepo.save(user);
 		}
 	}

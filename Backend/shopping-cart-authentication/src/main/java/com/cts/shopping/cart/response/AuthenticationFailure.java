@@ -5,7 +5,7 @@ import com.cts.shopping.cart.constants.Constants.ResponseStatus;
 
 public class AuthenticationFailure {
 	private String username;
-	private String message;
+	private String ErrorMessage;
 	private Constants.ResponseStatus status_code;
 
 	public String getUsername() {
@@ -16,12 +16,12 @@ public class AuthenticationFailure {
 		this.username = username;
 	}
 
-	public String getMessage() {
-		return message;
+	public String getErrorMessage() {
+		return ErrorMessage;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setErrorMessage(String ErrorMessage) {
+		this.ErrorMessage = ErrorMessage;
 	}
 
 	public Constants.ResponseStatus getStatus_code() {
@@ -32,10 +32,10 @@ public class AuthenticationFailure {
 		this.status_code = status_code;
 	}
 
-	public AuthenticationFailure(String username, String message, ResponseStatus status_code) {
+	public AuthenticationFailure(String username, String ErrorMessage, ResponseStatus status_code) {
 		super();
 		this.username = username;
-		this.message = message;
+		this.ErrorMessage = ErrorMessage;
 		this.status_code = status_code;
 	}
 
@@ -45,7 +45,7 @@ public class AuthenticationFailure {
 
 	@Override
 	public String toString() {
-		return "AuthenticationFailure [username=" + username + ", message=" + message + ", status_code=" + status_code
+		return "AuthenticationFailure [username=" + username + ", ErrorMessage=" + ErrorMessage + ", status_code=" + status_code
 				+ "]";
 	}
 

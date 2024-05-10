@@ -1,6 +1,0 @@
-package com.cts.shopping.cart.service;
-
-import com.cts.shopping.cart.model.LoginRequest;
-
-public interface LoginService {
-}

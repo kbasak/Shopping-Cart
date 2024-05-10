@@ -29,7 +29,7 @@ public class ExceptionHandlerApp {
 	@ExceptionHandler(UserAlreadyExistException.class)
 	public Map<String, String> handleExistUserException(UserAlreadyExistException ex) {
 		Map<String, String> errorMap = new HashMap<>();
-		errorMap.put("ErrorMessage", ex.getMessage());
+		errorMap.put("errorMessage", ex.getMessage());
 		return errorMap;
 	}
 	
@@ -37,7 +37,7 @@ public class ExceptionHandlerApp {
 	@ExceptionHandler(UserNotFoundException.class)
 	public Map<String, String> handleFindUserException(UserNotFoundException ex) {
 		Map<String, String> errorMap = new HashMap<>();
-		errorMap.put("ErrorMessage", ex.getMessage());
+		errorMap.put("errorMessage", ex.getMessage());
 		return errorMap;
 	}
 

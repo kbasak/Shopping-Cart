@@ -1,5 +1,0 @@
-package com.cts.shopping.cart.clients;
-
-public interface AuthClient {
-
-}

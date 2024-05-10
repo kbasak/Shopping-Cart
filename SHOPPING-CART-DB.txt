@@ -11,4 +11,19 @@ PRIMARY KEY (id),
 UNIQUE KEY (USERNAME)
 );
 
+CREATE TABLE ITEM
+(
+SKU VARCHAR(15) NOT NULL,
+ID INT NOT NULL auto_increment,
+DESCRIPTION VARCHAR(250) NOT NULL,
+QUANTITY INT NOT NULL,
+COST decimal(10,2) NOT NULL,
+MFR varchar(15) NOT NULL,
+VENDOR int NOT NULL,
+PRIMARY KEY (ID),
+UNIQUE KEY (SKU)
+);
 
+insert into item values("2294756", 3, "Brass Sledgehammer", 23, 1230, "xyz", 123);
+insert into item values("2323856", 2, "Smooth face wields nailing hammer", 34, 2345.0, "xyz", 121);
+insert into item values("2307247", 1, "Milled face curved claw Hammer", 12, 234, "xyz", 111);
