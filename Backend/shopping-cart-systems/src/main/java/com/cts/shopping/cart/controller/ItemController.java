@@ -13,15 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.shopping.cart.constants.Constants.ResponseStatus;
 import com.cts.shopping.cart.model.ItemDetails;
+import com.cts.shopping.cart.response.FetchItemResponse;
 import com.cts.shopping.cart.response.ValidationResponse;
-import com.cts.shopping.cart.service.AuthService;
+import com.cts.shopping.cart.service.ClientService;
 import com.cts.shopping.cart.service.ItemService;
+
+import feign.FeignException;
 
 @RestController
 public class ItemController {
 
 	@Autowired
-	private AuthService authService;
+	private ClientService authService;
 
 	@Autowired
 	private ItemService itemService;
@@ -32,17 +35,21 @@ public class ItemController {
 	public ResponseEntity<Object> getAllItems(@RequestHeader(name = "Authorization") String token) {
 		try {
 			logger.info("Checking JWT Token");
-			boolean validation_status = authService.checkValidationStatus(token);
+			ValidationResponse validation_status = authService.checkValidationStatus(token);
 			logger.info("Completed Checking JWT Token: " + validation_status);
-			if (validation_status == true) {
+			if (validation_status.isValidStatus() == true) {
 				List<ItemDetails> listOfItems = itemService.getAllItems();
-				return new ResponseEntity<>(listOfItems, HttpStatus.OK);
+				return new ResponseEntity<>(
+						new FetchItemResponse(validation_status.getUsername(), listOfItems, ResponseStatus.Success),
+						HttpStatus.OK);
 			}
-			return new ResponseEntity<>(new ValidationResponse(false), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ValidationResponse(false, ResponseStatus.Failure), HttpStatus.BAD_REQUEST);
 
-		} catch (Exception e) {
+		} catch (FeignException e) {
 			return new ResponseEntity<>(new ValidationResponse(false, ResponseStatus.Failure),
 					HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (Exception e) {
+			return new ResponseEntity<>("Exception occurs while fetching items", HttpStatus.NOT_FOUND);
 		}
 
 	}

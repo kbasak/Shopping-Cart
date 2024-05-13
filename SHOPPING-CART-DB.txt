@@ -27,3 +27,50 @@ UNIQUE KEY (SKU)
 insert into item values("2294756", 3, "Brass Sledgehammer", 23, 1230, "xyz", 123);
 insert into item values("2323856", 2, "Smooth face wields nailing hammer", 34, 2345.0, "xyz", 121);
 insert into item values("2307247", 1, "Milled face curved claw Hammer", 12, 234, "xyz", 111);
+
+tomo work: 
+fetch real username from the token : auth microservice done
+create a api which will take username and return userid done
+use that method by feing done
+
+add items to cart:
+	this will take sku, quantity & userid as a param done
+	will fetch item details using sku done
+	call the api from auth microservice using username and return userid done
+	then save those details in cart table done
+	use userfeing from cart controller to get userId done
+	before adding to cart compare the quantity with item table and add status A/C done
+
+
+--- Retrival of cart done
+
+--- modify done
+
+ checkout cart:
+	fetch which item is checking out by userid & sku
+	if cart status is A then
+	after checking out delete that item from cart table
+	otherwise throw item not available exception
+	** Update quantity in item table
+	update item table quantity after checkout from cart
+
+
+
+SKU ID
+2307247	
+2323856	
+2294756
+2294757
+2294758							
+
+
+
+
+
+
+
+
+
+
+
+

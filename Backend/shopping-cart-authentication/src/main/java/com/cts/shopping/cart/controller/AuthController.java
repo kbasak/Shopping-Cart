@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -24,6 +25,7 @@ import com.cts.shopping.cart.repository.UsersRepo;
 import com.cts.shopping.cart.request.LoginRequest;
 import com.cts.shopping.cart.response.AuthenticationFailure;
 import com.cts.shopping.cart.response.AuthenticationResponse;
+import com.cts.shopping.cart.response.UserInfo;
 import com.cts.shopping.cart.response.ValidationResponse;
 import com.cts.shopping.cart.service.AuthService;
 import com.cts.shopping.cart.service.AuthServiceImpl;
@@ -86,7 +88,8 @@ public class AuthController {
 	}
 
 	@GetMapping(path = "/validate", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Object> validatingAuthorizationToken(@RequestHeader(name = "Authorization") String tokenDup) throws ExpiredJwtException{
+	public ResponseEntity<Object> validatingAuthorizationToken(@RequestHeader(name = "Authorization") String tokenDup)
+			throws ExpiredJwtException {
 		String token = tokenDup.substring(7);
 		try {
 			UserDetails user = authServiceImpl.loadUserByUsername(jwtHelper.getUsernameFromToken(token));
@@ -97,16 +100,23 @@ public class AuthController {
 				logger.info("Token matched is Valid");
 				logger.info("END - validate()");
 				validationResponse.setValidStatus(true);
-				return new ResponseEntity<>(validationResponse, HttpStatus.OK);
+				return new ResponseEntity<>(new ValidationResponse(true, user.getUsername()), HttpStatus.OK);
 			} else {
 				throw new Exception("Invalid token");
 			}
 		} catch (Exception e) {
 			logger.debug("Invalid token - Bad Credentials Exception");
 			logger.info("END Exception - validatingAuthorizationToken()");
-			validationResponse.setValidStatus(false);
-			return new ResponseEntity<>(validationResponse, HttpStatus.BAD_REQUEST);
+			// validationResponse.setValidStatus(false);
+			return new ResponseEntity<>(new ValidationResponse(false), HttpStatus.BAD_REQUEST);
 		}
 
+	}
+
+	@GetMapping(path = "/getuserinfo/{username}")
+	public ResponseEntity<Object> fetchUserInfo(@PathVariable String username) {
+		logger.info("Inside FetchUser");
+		UserInfo userInfo = authServiceImpl.fetchUserInfo(username);
+		return new ResponseEntity<>(userInfo, HttpStatus.ACCEPTED);
 	}
 }

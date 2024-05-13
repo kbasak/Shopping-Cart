@@ -10,8 +10,8 @@ public class ValidationResponse {
 	@Id
 	@JsonProperty
 	private boolean validStatus;
-
 	private Constants.ResponseStatus status_code;
+	private String username;
 
 	public boolean isValidStatus() {
 		return validStatus;
@@ -29,18 +29,35 @@ public class ValidationResponse {
 		this.status_code = status_code;
 	}
 
-	public ValidationResponse(boolean validStatus) {
-		super();
-		this.validStatus = validStatus;
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public ValidationResponse(boolean validStatus, ResponseStatus status_code) {
+		// super();
+		// this.validStatus = validStatus;
+		this(validStatus, status_code, "Not Found");
+	}
+
+	public ValidationResponse(boolean validStatus, ResponseStatus status_code, String username) {
 		super();
 		this.validStatus = validStatus;
 		this.status_code = status_code;
+		this.username = username;
 	}
 
 	public ValidationResponse() {
 		super();
 	}
+
+	@Override
+	public String toString() {
+		return "ValidationResponse [validStatus=" + validStatus + ", status_code=" + status_code + ", username="
+				+ username + "]";
+	}
+
 }

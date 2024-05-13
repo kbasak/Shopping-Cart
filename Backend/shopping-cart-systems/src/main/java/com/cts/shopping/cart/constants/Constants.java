@@ -5,4 +5,8 @@ public class Constants {
         Success,
         Failure,
     }
+	
+	public enum CartStatus {
+		A, C
+	}
 }

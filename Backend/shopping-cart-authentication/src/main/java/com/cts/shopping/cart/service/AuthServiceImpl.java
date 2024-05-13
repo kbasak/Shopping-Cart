@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.cts.shopping.cart.exception.UserAlreadyExistException;
 import com.cts.shopping.cart.model.UsersDetails;
 import com.cts.shopping.cart.repository.UsersRepo;
+import com.cts.shopping.cart.response.UserInfo;
 
 @Service
 public class AuthServiceImpl implements AuthService, UserDetailsService {
@@ -22,7 +23,7 @@ public class AuthServiceImpl implements AuthService, UserDetailsService {
 	private UsersRepo userRepo;
 
 	private Logger logger = LoggerFactory.getLogger(AuthServiceImpl.class);
-	
+
 	@Override
 	public UsersDetails registerUser(UsersDetails user) throws Exception {
 		logger.info("Start authService register method");
@@ -50,6 +51,13 @@ public class AuthServiceImpl implements AuthService, UserDetailsService {
 			throw new UsernameNotFoundException("User not found for email: " + username);
 		}
 		return new User(usersdetails.getUsername(), usersdetails.getPassword(), new ArrayList<>());
+	}
+
+	@Override
+	public UserInfo fetchUserInfo(String username) {
+		UsersDetails usersdetails = userRepo.findByUsername(username);
+		UserInfo userInfo = new UserInfo(usersdetails.getId(), usersdetails.getUsername(), usersdetails.getName());
+		return userInfo;
 	}
 
 }

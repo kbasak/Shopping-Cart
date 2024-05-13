@@ -14,10 +14,18 @@ public class ItemDetails {
 	private long id;
 	private String sku;
 	private String description;
-	private String quantity;
+	private int quantity;
 	private double cost;
 	private String mfr;
 	private int vendor;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public String getSku() {
 		return sku;
@@ -35,11 +43,11 @@ public class ItemDetails {
 		this.description = description;
 	}
 
-	public String getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(String quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 
@@ -67,7 +75,18 @@ public class ItemDetails {
 		this.vendor = vendor;
 	}
 
-	public ItemDetails(String sku, String description, String quantity, double cost, String mfr, int vendor) {
+	public ItemDetails(long id, String sku, String description, int quantity, double cost, String mfr, int vendor) {
+		super();
+		this.id = id;
+		this.sku = sku;
+		this.description = description;
+		this.quantity = quantity;
+		this.cost = cost;
+		this.mfr = mfr;
+		this.vendor = vendor;
+	}
+
+	public ItemDetails(String sku, String description, int quantity, double cost, String mfr, int vendor) {
 		super();
 		this.sku = sku;
 		this.description = description;
@@ -79,6 +98,12 @@ public class ItemDetails {
 
 	public ItemDetails() {
 		super();
+	}
+
+	@Override
+	public String toString() {
+		return "ItemDetails [id=" + getId() + ", sku=" + sku + ", description=" + description + ", quantity=" + quantity
+				+ ", cost=" + cost + ", mfr=" + mfr + ", vendor=" + vendor + "]";
 	}
 
 }
