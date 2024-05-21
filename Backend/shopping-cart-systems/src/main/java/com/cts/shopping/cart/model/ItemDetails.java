@@ -18,6 +18,7 @@ public class ItemDetails {
 	private double cost;
 	private String mfr;
 	private int vendor;
+	private String image;
 
 	public long getId() {
 		return id;
@@ -75,7 +76,16 @@ public class ItemDetails {
 		this.vendor = vendor;
 	}
 
-	public ItemDetails(long id, String sku, String description, int quantity, double cost, String mfr, int vendor) {
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public ItemDetails(long id, String sku, String description, int quantity, double cost, String mfr, int vendor,
+			String image) {
 		super();
 		this.id = id;
 		this.sku = sku;
@@ -84,9 +94,11 @@ public class ItemDetails {
 		this.cost = cost;
 		this.mfr = mfr;
 		this.vendor = vendor;
+		this.image = image;
 	}
 
-	public ItemDetails(String sku, String description, int quantity, double cost, String mfr, int vendor) {
+	public ItemDetails(String sku, String description, int quantity, double cost, String mfr, int vendor,
+			String image) {
 		super();
 		this.sku = sku;
 		this.description = description;
@@ -94,6 +106,7 @@ public class ItemDetails {
 		this.cost = cost;
 		this.mfr = mfr;
 		this.vendor = vendor;
+		this.image = image;
 	}
 
 	public ItemDetails() {
@@ -102,8 +115,8 @@ public class ItemDetails {
 
 	@Override
 	public String toString() {
-		return "ItemDetails [id=" + getId() + ", sku=" + sku + ", description=" + description + ", quantity=" + quantity
-				+ ", cost=" + cost + ", mfr=" + mfr + ", vendor=" + vendor + "]";
+		return "ItemDetails [id=" + id + ", sku=" + sku + ", description=" + description + ", quantity=" + quantity
+				+ ", cost=" + cost + ", mfr=" + mfr + ", vendor=" + vendor + ", image=" + image + "]";
 	}
 
 }

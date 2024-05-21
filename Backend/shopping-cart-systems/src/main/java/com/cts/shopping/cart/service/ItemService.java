@@ -15,4 +15,6 @@ public interface ItemService {
 	public List<CartDetails> getUserCarts(String username);
 
 	public List<String> checkOutCarts(List<Long> id, String username);
+	
+	public List<String> deleteFromCart(List<Long> ids, String username);
 }

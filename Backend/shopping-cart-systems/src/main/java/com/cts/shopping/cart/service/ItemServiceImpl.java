@@ -57,21 +57,29 @@ public class ItemServiceImpl implements ItemService {
 			if (itemDetails.get(0).getQuantity() >= quantity) {
 				logger.info("Into Cart Service-3A");
 				cartDetails = new CartDetails(existingCart.get(0).getId(), userId, itemDetails.get(0).getSku(),
-						quantity, itemDetails.get(0).getCost(), "A");
+						quantity, itemDetails.get(0).getCost(), itemDetails.get(0).getImage(), "A",
+						itemDetails.get(0).getDescription(), itemDetails.get(0).getMfr(),
+						itemDetails.get(0).getVendor());
 			} else {
 				logger.info("Into Cart Service-3B");
 				cartDetails = new CartDetails(existingCart.get(0).getId(), userId, itemDetails.get(0).getSku(),
-						quantity, itemDetails.get(0).getCost(), "C");
+						quantity, itemDetails.get(0).getCost(), itemDetails.get(0).getImage(), "C",
+						itemDetails.get(0).getDescription(), itemDetails.get(0).getMfr(),
+						itemDetails.get(0).getVendor());
 			}
 		} else {
 			if (itemDetails.get(0).getQuantity() >= quantity) {
 				logger.info("Into Cart Service-4A");
 				cartDetails = new CartDetails(userId, itemDetails.get(0).getSku(), quantity,
-						itemDetails.get(0).getCost(), "A");
+						itemDetails.get(0).getCost(), itemDetails.get(0).getImage(), "A",
+						itemDetails.get(0).getDescription(), itemDetails.get(0).getMfr(),
+						itemDetails.get(0).getVendor());
 			} else {
 				logger.info("Into Cart Service-4B");
 				cartDetails = new CartDetails(userId, itemDetails.get(0).getSku(), quantity,
-						itemDetails.get(0).getCost(), "C");
+						itemDetails.get(0).getCost(), itemDetails.get(0).getImage(), "C",
+						itemDetails.get(0).getDescription(), itemDetails.get(0).getMfr(),
+						itemDetails.get(0).getVendor());
 			}
 		}
 
@@ -107,7 +115,8 @@ public class ItemServiceImpl implements ItemService {
 					logger.info("Cart Details Checkout- 2");
 					ItemDetails itemDetails2 = new ItemDetails(itemDetails.getId(), itemDetails.getSku(),
 							itemDetails.getDescription(), (itemDetails.getQuantity() - cartDetails.get().getQuantity()),
-							itemDetails.getCost(), itemDetails.getMfr(), itemDetails.getVendor());
+							itemDetails.getCost(), itemDetails.getMfr(), itemDetails.getVendor(),
+							itemDetails.getImage());
 					logger.info("Cart Details Checkout- 3");
 					itemRepo.save(itemDetails2);
 					logger.info("Cart Details Checkout- 4");
@@ -126,13 +135,15 @@ public class ItemServiceImpl implements ItemService {
 								logger.info("Into Cart Service-3A");
 								CartDetails updatingCartStatus = new CartDetails(existingCart.getId(),
 										existingCart.getUserid(), existingCart.getSku(), existingCart.getQuantity(),
-										existingCart.getCost(), "A");
+										existingCart.getCost(), existingCart.getImage(), "A",
+										existingCart.getDescription(), existingCart.getMfr(), existingCart.getVendor());
 								cartRepo.save(updatingCartStatus);
 							} else {
 								logger.info("Into Cart Service-3B");
 								CartDetails updatingCartStatus = new CartDetails(existingCart.getId(),
 										existingCart.getUserid(), existingCart.getSku(), existingCart.getQuantity(),
-										existingCart.getCost(), "C");
+										existingCart.getCost(), existingCart.getImage(), "C",
+										existingCart.getDescription(), existingCart.getMfr(), existingCart.getVendor());
 								cartRepo.save(updatingCartStatus);
 							}
 
@@ -143,6 +154,24 @@ public class ItemServiceImpl implements ItemService {
 					logger.info("Cart Details Checkout- 6");
 					checkOutMsg.add("SKU: " + cartDetails.get().getSku() + " is Out Of Stock");
 				}
+			}
+		} catch (Exception e) {
+			logger.info("Exception in CheckOutCart Method: " + e);
+			return checkOutMsg;
+		}
+		return checkOutMsg;
+	}
+
+	@Override
+	public List<String> deleteFromCart(List<Long> ids, String username) {
+		List<String> checkOutMsg = new ArrayList<>();
+		try {
+			for (long id : ids) {
+				logger.info(id + ": will be deleted ");
+				Optional<CartDetails> cartDetails = cartRepo.findById(id);
+				logger.info("Cart Details: " + cartDetails.get().toString());
+				cartRepo.deleteById(id);
+				checkOutMsg.add("SKU: " + cartDetails.get().getSku() + " is Deleted Out Successfully");
 			}
 		} catch (Exception e) {
 			logger.info("Exception in CheckOutCart Method: " + e);

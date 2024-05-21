@@ -36,4 +36,20 @@ public class AuthServiceTest {
 		assertThat(authServiceImpl.registerUser(usersDetails)).isEqualTo(usersDetails);
 	}
 
+	@Test
+	public void existByUsername() {
+		UsersDetails usersDetails = new UsersDetails("someone@gmail.com", "Someone", "Something@123");
+		Mockito.when(usersRepo.save(usersDetails)).thenReturn(usersDetails);
+
+		Mockito.when(usersRepo.existsByUsername("someone@gmail.com")).thenReturn(true);
+		Mockito.when(usersRepo.existsByUsername(Mockito.any())).thenReturn(false);
+	}
+
+	@Test
+	public void fetchUserInfo() {
+		UsersDetails usersDetails1 = new UsersDetails("someone@gmail.com", "Someone", "Something@123");
+		String username = "Someone";
+		Mockito.when(usersRepo.findByUsername(username)).thenReturn(usersDetails1);
+	}
+
 }

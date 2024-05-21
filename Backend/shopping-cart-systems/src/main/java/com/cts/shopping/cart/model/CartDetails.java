@@ -16,7 +16,11 @@ public class CartDetails {
 	private String sku;
 	private int quantity;
 	private double cost;
+	private String image;
 	private String status;
+	private String description;
+	private String mfr;
+	private int vendor;
 
 	public long getId() {
 		return id;
@@ -58,6 +62,14 @@ public class CartDetails {
 		this.cost = cost;
 	}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	public String getStatus() {
 		return status;
 	}
@@ -66,23 +78,57 @@ public class CartDetails {
 		this.status = status;
 	}
 
-	public CartDetails(long id, long userid, String sku, int quantity, double cost, String status) {
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getMfr() {
+		return mfr;
+	}
+
+	public void setMfr(String mfr) {
+		this.mfr = mfr;
+	}
+
+	public int getVendor() {
+		return vendor;
+	}
+
+	public void setVendor(int vendor) {
+		this.vendor = vendor;
+	}
+
+	public CartDetails(long id, long userid, String sku, int quantity, double cost, String image, String status,
+			String description, String mfr, int vendor) {
 		super();
 		this.id = id;
 		this.userid = userid;
 		this.sku = sku;
 		this.quantity = quantity;
 		this.cost = cost;
+		this.image = image;
 		this.status = status;
+		this.description = description;
+		this.mfr = mfr;
+		this.vendor = vendor;
 	}
 
-	public CartDetails(long userid, String sku, int quantity, double cost, String status) {
+	public CartDetails(long userid, String sku, int quantity, double cost, String image, String status,
+			String description, String mfr, int vendor) {
 		super();
 		this.userid = userid;
 		this.sku = sku;
 		this.quantity = quantity;
 		this.cost = cost;
+		this.image = image;
 		this.status = status;
+		this.description = description;
+		this.mfr = mfr;
+		this.vendor = vendor;
 	}
 
 	public CartDetails() {
@@ -91,8 +137,9 @@ public class CartDetails {
 
 	@Override
 	public String toString() {
-		return "CartDetails [userid=" + userid + ", sku=" + sku + ", quantity=" + quantity + ", cost=" + cost
-				+ ", status=" + status + "]";
+		return "CartDetails [id=" + id + ", userid=" + userid + ", sku=" + sku + ", quantity=" + quantity + ", cost="
+				+ cost + ", image=" + image + ", status=" + status + ", description=" + description + ", mfr=" + mfr
+				+ ", vendor=" + vendor + "]";
 	}
 
 }
