@@ -149,7 +149,7 @@ public class ItemServiceImpl implements ItemService {
 
 						}
 					}
-					checkOutMsg.add("SKU: " + cartDetails.get().getSku() + " is Checking Out Successfully");
+					checkOutMsg.add("SKU: " + cartDetails.get().getSku() + " Check Out Successfully");
 				} else {
 					logger.info("Cart Details Checkout- 6");
 					checkOutMsg.add("SKU: " + cartDetails.get().getSku() + " is Out Of Stock");

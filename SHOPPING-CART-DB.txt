@@ -1,13 +1,12 @@
-create database shopping_cart;
-
 use shopping_cart;
 
 CREATE TABLE USER_DETAILS
 (
 id INT NOT NULL auto_increment,
-USERNAME VARCHAR(10) NOT NULL,
+USERNAME VARCHAR(30) NOT NULL,
+NAME VARCHAR(30) NOT NULL,
 PASSWORD VARCHAR(256) NOT NULL,
-PRIMARY KEY (id),
+PRIMARY KEY (user_id),
 UNIQUE KEY (USERNAME)
 );
 
@@ -24,53 +23,31 @@ PRIMARY KEY (ID),
 UNIQUE KEY (SKU)
 );
 
-insert into item values("2294756", 3, "Brass Sledgehammer", 23, 1230, "xyz", 123);
+CREATE TABLE CART
+(
+id INT NOT NULL auto_increment,
+SKU VARCHAR(15) NOT NULL,
+USERID INT NOT NULL,
+QUANTITY INT NOT NULL,
+COST decimal(10,2) NOT NULL,
+STATUS varchar(1) NOT NULL,
+PRIMARY KEY (id)
+);
+
+----------Demo Data------------
+insert into item values("2294758", 5, "Wodden Hammer", 20, 98, "xyz", 141);
 insert into item values("2323856", 2, "Smooth face wields nailing hammer", 34, 2345.0, "xyz", 121);
 insert into item values("2307247", 1, "Milled face curved claw Hammer", 12, 234, "xyz", 111);
 
-tomo work: 
-fetch real username from the token : auth microservice done
-create a api which will take username and return userid done
-use that method by feing done
 
-add items to cart:
-	this will take sku, quantity & userid as a param done
-	will fetch item details using sku done
-	call the api from auth microservice using username and return userid done
-	then save those details in cart table done
-	use userfeing from cart controller to get userId done
-	before adding to cart compare the quantity with item table and add status A/C done
-
-
---- Retrival of cart done
-
---- modify done
-
- checkout cart:
-	fetch which item is checking out by userid & sku
-	if cart status is A then
-	after checking out delete that item from cart table
-	otherwise throw item not available exception
-	** Update quantity in item table
-	update item table quantity after checkout from cart
+select * from user_details;
+select * from item;
+select * from cart;
 
 
 
-SKU ID
-2307247	
-2323856	
-2294756
-2294757
-2294758							
-
-
-
-
-
-
-
-
-
-
-
+alter table user_details change column user_id id int;
+UPDATE item SET image = "https://www.stanleytools.com/NAG/PRODUCT/IMAGES/HIRES/STHT51456/STHT51456_1.jpg?resize=530x530" WHERE id=1;
+UPDATE item SET quantity = 30 WHERE id=1;
+ALTER TABLE cart ADD VENDOR int;
 
